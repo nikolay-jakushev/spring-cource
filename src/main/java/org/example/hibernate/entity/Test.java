@@ -17,36 +17,41 @@ public class Test {
         try {
             //Создание сессии
             Session session = factory.getCurrentSession();
+            session.beginTransaction();
+
+            Employee employee = session.get(Employee.class, 1);
+            employee.setSalary(1500000);
+
+            session.getTransaction().commit();
             //Создание объекта
-            Employee employee = new Employee(
-                    "Aleksandr",
-                    "Ivanov",
-                    "Sale",
-                    65000);
+//            Employee employee = new Employee(
+//                    "Max",
+//                    "Mix",
+//                    "IT",
+//                    670000);
             //Начало транзакции
-            session.beginTransaction();
             //Сохранения работника
-            session.save(employee);
+//            session.save(employee);
             //Закрытие транзакции
-            session.getTransaction().commit();
+//
+//            //Получение id работника из БД
+//            //int _id = employee.get_id();
+//            //Создание сессии
+//            session = factory.getCurrentSession();
+//            //Начало сессии
+//            session.beginTransaction();
+//            //Получение работника
+//            //Employee employee1 = session.get(Employee.class, _id);
+//
+//            List<Employee> employees = session.createQuery("from Employee " +
+//                            "where name = 'Aleksandr'")
+//                    .getResultList();
+//            for (Employee emps : employees) {
+//                System.out.println(emps);
+//            }
 
-            //Получение id работника из БД
-            //int _id = employee.get_id();
-            //Создание сессии
-            session = factory.getCurrentSession();
-            //Начало сессии
-            session.beginTransaction();
-            //Получение работника
-            //Employee employee1 = session.get(Employee.class, _id);
-
-            List<Employee> employees = session.createQuery("from Employee")
-                    .getResultList();
-            for (Employee emps : employees) {
-                System.out.println(emps);
-            }
-
-            session.getTransaction().commit();
-            System.out.println(employee);
+//            session.getTransaction().commit();
+//            System.out.println(employee);
 
         } finally {
             factory.close();
