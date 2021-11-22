@@ -14,14 +14,15 @@ public class Detail {
     private String city;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
 
-    public Detail() {}
+    public Detail() {
+    }
 
-    public Detail(String city, int phoneNumber, String email) {
+    public Detail(String city, String phoneNumber, String email) {
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -43,11 +44,11 @@ public class Detail {
         this.city = city;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -68,4 +69,7 @@ public class Detail {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
+
 }
