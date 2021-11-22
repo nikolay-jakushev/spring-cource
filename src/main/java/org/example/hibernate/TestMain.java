@@ -14,21 +14,32 @@ public class TestMain {
                 .addAnnotatedClass(Detail.class)
                 .buildSessionFactory();
 
-        try {
-            Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
 
-            Employee employee = new Employee("Natalia", "Kuzminova", "QA", 450);
-            Detail detail = new Detail("Omsk", "+799842234", "n.kuz@mfdsg.com");
-            employee.setEmpDetail(detail);
+        try {
+//            Session session = sessionFactory.getCurrentSession();
+//
+//            Employee employee = new Employee("Natalia", "Kuzminova", "QA", 450);
+//            Detail detail = new Detail("Omsk", "+799842234", "n.kuz@mfdsg.com");
+//            employee.setEmpDetail(detail);
+//
+//            session.beginTransaction();
+//
+//            session.save(employee);
+//
+//            session.getTransaction().commit();
 
             session.beginTransaction();
-
-            session.save(employee);
+            Employee employee = session.get(Employee.class, 1);
+            System.out.println(employee.getEmpDetail());
 
             session.getTransaction().commit();
 
+
+
         }
         finally {
+            session.close();
             sessionFactory.close();
         }
     }
