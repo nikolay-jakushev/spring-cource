@@ -19,8 +19,11 @@ public class Test {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
 
-            Employee employee = session.get(Employee.class, 1);
-            employee.setSalary(1500000);
+//            Employee employee = session.get(Employee.class, 1);
+//            employee.setSalary(1500000);
+
+            session.createQuery("update Employee set salary = 1000 " +
+                    "where name = 'Aleksandr'").executeUpdate();
 
             session.getTransaction().commit();
             //Создание объекта
