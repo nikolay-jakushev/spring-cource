@@ -12,20 +12,30 @@ public class Test {
                 .buildSessionFactory();
 
         try {
+            //Создание сессии
             Session session = factory.getCurrentSession();
+            //Создание объекта
             Employee employee = new Employee(
                     "Aleksandr",
                     "Ivanov",
                     "IT",
                     55000);
+            //Начало транзакции
             session.beginTransaction();
+            //Сохранения работника
             session.save(employee);
+            //Закрытие транзакции
             session.getTransaction().commit();
 
+            //Получение id работника из БД
             int _id = employee.get_id();
+            //Создание сессии
             session = factory.getCurrentSession();
+            //Начало сессии
             session.beginTransaction();
+            //Получение работника
             Employee employee1 = session.get(Employee.class, _id);
+            //Заркытие сессии
             session.getTransaction().commit();
             System.out.println(employee);
 
