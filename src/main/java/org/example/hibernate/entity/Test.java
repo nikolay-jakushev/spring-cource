@@ -1,8 +1,11 @@
 package org.example.hibernate.entity;
 
+import org.example.aop.Library;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
@@ -18,8 +21,8 @@ public class Test {
             Employee employee = new Employee(
                     "Aleksandr",
                     "Ivanov",
-                    "IT",
-                    55000);
+                    "Sale",
+                    65000);
             //Начало транзакции
             session.beginTransaction();
             //Сохранения работника
@@ -28,14 +31,20 @@ public class Test {
             session.getTransaction().commit();
 
             //Получение id работника из БД
-            int _id = employee.get_id();
+            //int _id = employee.get_id();
             //Создание сессии
             session = factory.getCurrentSession();
             //Начало сессии
             session.beginTransaction();
             //Получение работника
-            Employee employee1 = session.get(Employee.class, _id);
-            //Заркытие сессии
+            //Employee employee1 = session.get(Employee.class, _id);
+
+            List<Employee> employees = session.createQuery("from Employee")
+                    .getResultList();
+            for (Employee emps : employees) {
+                System.out.println(emps);
+            }
+
             session.getTransaction().commit();
             System.out.println(employee);
 
